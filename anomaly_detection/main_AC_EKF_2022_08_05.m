@@ -258,7 +258,6 @@ Norm_res_paper = zeros(Var_N,T - n_dyn);
             S = H*M*H' + Rz;    % Measurement prediction-error (or Innovation) covariance matrix
             K = M*H'/S;         % Kalman gain
             P = M - K*H*M;      % state estimation Error Covariance Matrix (P+)
-        %         P = M - K*S*K';   % This is the equation in Dragan's paper  
         
             %%% Filtering step
             z_for_EKF = wls_z(B_N,forecasting(B_N : end),[0;forecasting(1:B_N - 1)]);
