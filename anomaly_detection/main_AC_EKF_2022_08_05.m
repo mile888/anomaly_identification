@@ -101,7 +101,7 @@ omeg = zeros(num_meas,T);
 FDI = 1; % "1" means we have FDI and "0" means we don't
 FDI_sen = 1; % FDI scenario num can be from 1 to 6
 att_w = 0.1;%0.03; % attack weight
-att_bus = www;%combos(www,:);%[8 10];%www; %input('FDIA target bus: '); % attacked bus
+att_sta = www;%combos(www,:);%[8 10];%www; %input('FDIA target bus: '); % attacked bus
 int_att = 350;%500; % initial point of attack
 end_att = 1000; % finishing point of the attack
 
@@ -152,7 +152,7 @@ for i = 1 : T
 
 %%% Senario 1: does have the perfect knowledge (specially about the noise)
         x_vec = [zeros(13,1);zeros(14,1)];
-        x_vec(att_bus + 13) = att_w;
+        x_vec(att_sta + 13) = att_w;
         [~, V, del] = wls(B_N, meas_T_noisy(:,i), sig(:,i));
         attack_vec_WLS = -wls_z(B_N,V,del)+wls_z(B_N,V+x_vec(B_N : end),del+[0;x_vec(1 : B_N-1)]); 
 %%% more scenarios can be added
@@ -235,7 +235,7 @@ Norm_res_paper = zeros(Var_N,T - n_dyn);
         
         %%% Senario 1: does have the perfect knowledge (specially about the noise)
                 x_vec = [zeros(13,1);zeros(14,1)];
-                x_vec(att_bus + 13) = att_w;
+                x_vec(att_sta + 13) = att_w;
                 [~, V, del] = wls(B_N, meas_T_noisy(:,j), sig(:,j));
                 attack_vec_EKF = -wls_z(B_N,V,del) + wls_z(B_N,V + x_vec(B_N : end), del+[0; x_vec(1 : B_N-1)]);
         %%% more scenarios can be added
@@ -286,7 +286,7 @@ set(0,'DefaultAxesFontName','Times New Roman',...
 fig_plot = 1; %"0" means not plot and "1" means plot
 plot_time_WLS = 1/n_dyn_2:24/n_dyn_2:24; % to map the time to 24 hours 
 plot_time_EKF = 1/(n_dyn_2-n_dyn):24/(n_dyn_2-n_dyn):24; % to map the time to 24 hours
-plot_bus_num = att_bus;
+plot_bus_num = att_sta;
 disp(' ');
 disp(['The results of bus number ',num2str(plot_bus_num),' will be demonstrated']);
 disp(' ');
