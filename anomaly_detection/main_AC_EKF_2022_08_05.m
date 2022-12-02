@@ -100,7 +100,7 @@ omeg = zeros(num_meas,T);
 %%% fals data injection (FDI) attack vector
 FDI = 1; % "1" means we have FDI and "0" means we don't
 FDI_sen = 1; % FDI scenario num can be from 1 to 6
-sw = 0.1;%0.03; % attack weight
+att_w = 0.1;%0.03; % attack weight
 FDIA_state = www;%combos(www,:);%[8 10];%www; %input('FDIA target bus: '); % attacked bus
 int_att = 350;%500; % initial point of attack
 end_att = 1000; % finishing point of the attack
